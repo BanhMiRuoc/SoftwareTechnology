@@ -1,0 +1,545 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6F0CD9ED-FDBE-478E-8D48-43023C255F75}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Project_DBManager</RootNamespace>
+    <AssemblyName>Project_DBManager</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Azure.Core">
+      <HintPath>packages\Azure.Core.1.39.0\lib\net472\Azure.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Azure.Identity">
+      <HintPath>packages\Azure.Identity.1.11.2\lib\netstandard2.0\Azure.Identity.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.Core, Version=2.1.7.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
+      <HintPath>..\packages\GMap.NET.Core.2.1.7\lib\net472\GMap.NET.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsForms, Version=2.1.7.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
+      <HintPath>..\packages\GMap.NET.WinForms.2.1.7\lib\net472\GMap.NET.WindowsForms.dll</HintPath>
+    </Reference>
+    <Reference Include="GMap.NET.WindowsPresentation, Version=2.1.7.0, Culture=neutral, PublicKeyToken=b85b9027b614afef, processorArchitecture=MSIL">
+      <HintPath>..\packages\GMap.NET.WinPresentation.2.1.7\lib\net472\GMap.NET.WindowsPresentation.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces">
+      <HintPath>packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client">
+      <HintPath>packages\Microsoft.Identity.Client.4.60.3\lib\net462\Microsoft.Identity.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Identity.Client.Extensions.Msal">
+      <HintPath>packages\Microsoft.Identity.Client.Extensions.Msal.4.60.3\lib\netstandard2.0\Microsoft.Identity.Client.Extensions.Msal.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Abstractions">
+      <HintPath>packages\Microsoft.IdentityModel.Abstractions.7.5.1\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens">
+      <HintPath>packages\Microsoft.IdentityModel.JsonWebTokens.7.5.1\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging">
+      <HintPath>packages\Microsoft.IdentityModel.Logging.7.5.1\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols">
+      <HintPath>packages\Microsoft.IdentityModel.Protocols.7.5.1\lib\net472\Microsoft.IdentityModel.Protocols.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Protocols.OpenIdConnect">
+      <HintPath>packages\Microsoft.IdentityModel.Protocols.OpenIdConnect.7.5.1\lib\net472\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens">
+      <HintPath>packages\Microsoft.IdentityModel.Tokens.7.5.1\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ClientModel">
+      <HintPath>packages\System.ClientModel.1.0.0\lib\netstandard2.0\System.ClientModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager">
+      <HintPath>packages\System.Configuration.ConfigurationManager.8.0.0\lib\net462\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.SQLite, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\lib\net46\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.115.5\lib\net46\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.115.5, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.115.5\lib\net46\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.DiagnosticSource">
+      <HintPath>packages\System.Diagnostics.DiagnosticSource.8.0.1\lib\net462\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IdentityModel.Tokens.Jwt">
+      <HintPath>packages\System.IdentityModel.Tokens.Jwt.7.5.1\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory">
+      <HintPath>packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory.Data">
+      <HintPath>packages\System.Memory.Data.8.0.0\lib\net462\System.Memory.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl">
+      <HintPath>packages\System.Security.AccessControl.6.0.1\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.ProtectedData">
+      <HintPath>packages\System.Security.Cryptography.ProtectedData.8.0.0\lib\net462\System.Security.Cryptography.ProtectedData.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions">
+      <HintPath>packages\System.Security.Permissions.8.0.0\lib\net462\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Text.Encodings.Web">
+      <HintPath>packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json">
+      <HintPath>packages\System.Text.Json.8.0.3\lib\net462\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAO\ActDAO.cs" />
+    <Compile Include="DAO\BrandDAO.cs" />
+    <Compile Include="DAO\ContractDAO.cs" />
+    <Compile Include="DAO\InformationDAO.cs" />
+    <Compile Include="DAO\PostDAO.cs" />
+    <Compile Include="DAO\StaffDAO.cs" />
+    <Compile Include="DAO\TaskDAO.cs" />
+    <Compile Include="DAO\HistoryDAO.cs" />
+    <Compile Include="DTO\Act.cs" />
+    <Compile Include="DTO\AssignTask.cs" />
+    <Compile Include="DTO\BrandInfo.cs" />
+    <Compile Include="DTO\HistoryEditBrandInfo.cs" />
+    <Compile Include="DAO\UserInfoDAO.cs" />
+    <Compile Include="DTO\AccountWithPhone.cs" />
+    <Compile Include="DTO\ContractInfo.cs" />
+    <Compile Include="DTO\OfferInfo.cs" />
+    <Compile Include="DTO\PostInfo.cs" />
+    <Compile Include="DTO\PostInfoToShow.cs" />
+    <Compile Include="DTO\Staff.cs" />
+    <Compile Include="DTO\Task.cs" />
+    <Compile Include="DTO\TaskDetail.cs" />
+    <Compile Include="DTO\TempBrand.cs" />
+    <Compile Include="Service\SendEmail.cs" />
+    <Compile Include="Service\Validator.cs" />
+    <Compile Include="UC\formQuenMatKhau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UC\formQuenMatKhau.Designer.cs">
+      <DependentUpon>formQuenMatKhau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\formThuThap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UC\formThuThap.Designer.cs">
+      <DependentUpon>formThuThap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucPhanCongCongViec.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucPhanCongCongViec.Designer.cs">
+      <DependentUpon>ucPhanCongCongViec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucCapLaiMatKhau.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucCapLaiMatKhau.Designer.cs">
+      <DependentUpon>ucCapLaiMatKhau.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucTaoTaiKhoan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucTaoTaiKhoan.Designer.cs">
+      <DependentUpon>ucTaoTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucThuThapThongTin.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucThuThapThongTin.Designer.cs">
+      <DependentUpon>ucThuThapThongTin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucTrangChu.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucTrangChu.Designer.cs">
+      <DependentUpon>ucTrangChu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucVoHieuHoaKhoiPhuc.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucVoHieuHoaKhoiPhuc.Designer.cs">
+      <DependentUpon>ucVoHieuHoaKhoiPhuc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucBaoCaoThongKeBaiDang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucBaoCaoThongKeBaiDang.Designer.cs">
+      <DependentUpon>ucBaoCaoThongKeBaiDang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucBaoCaoThongKeHopDong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucBaoCaoThongKeHopDong.Designer.cs">
+      <DependentUpon>ucBaoCaoThongKeHopDong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucChinhSuaHopDong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucChinhSuaHopDong.Designer.cs">
+      <DependentUpon>ucChinhSuaHopDong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucChinhSuaBaiDang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucChinhSuaBaiDang.Designer.cs">
+      <DependentUpon>ucChinhSuaBaiDang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucDanhSachBaiDang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucDanhSachBaiDang.Designer.cs">
+      <DependentUpon>ucDanhSachBaiDang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucThongTinNhanVien.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucThongTinNhanVien.Designer.cs">
+      <DependentUpon>ucThongTinNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucDanhSachNhanVien.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucDanhSachNhanVien.Designer.cs">
+      <DependentUpon>ucDanhSachNhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucTaoBaiDang.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucTaoBaiDang.Designer.cs">
+      <DependentUpon>ucTaoBaiDang.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucDanhSachHopDong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucDanhSachHopDong.Designer.cs">
+      <DependentUpon>ucDanhSachHopDong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAO\AccountDAO.cs" />
+    <Compile Include="DAO\DataProvider.cs" />
+    <Compile Include="DTO\Account.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLogin.Designer.cs">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormLoginAuth.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormLoginAuth.Designer.cs">
+      <DependentUpon>FormLoginAuth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UC\ucTaoHopDong.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucTaoHopDong.Designer.cs">
+      <DependentUpon>ucTaoHopDong.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucThongTinCaNhan.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucChinhSuaThongTinUuDai.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucChinhSuaThongTinUuDai.Designer.cs">
+      <DependentUpon>ucChinhSuaThongTinUuDai.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucThongTinCaNhan.Designer.cs">
+      <DependentUpon>ucThongTinCaNhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC\ucXemCongViec.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucXemCongViec.Designer.cs">
+      <DependentUpon>ucXemCongViec.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="UC\formQuenMatKhau.resx">
+      <DependentUpon>formQuenMatKhau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\formThuThap.resx">
+      <DependentUpon>formThuThap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucCapLaiMatKhau.resx">
+      <DependentUpon>ucCapLaiMatKhau.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucChinhSuaHopDong.resx">
+      <DependentUpon>ucChinhSuaHopDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucPhanCongCongViec.resx">
+      <DependentUpon>ucPhanCongCongViec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucTaoTaiKhoan.resx">
+      <DependentUpon>ucTaoTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucChinhSuaThongTinUuDai.resx">
+      <DependentUpon>ucChinhSuaThongTinUuDai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucThuThapThongTin.resx">
+      <DependentUpon>ucThuThapThongTin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucTrangChu.resx">
+      <DependentUpon>ucTrangChu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucVoHieuHoaKhoiPhuc.resx">
+      <DependentUpon>ucVoHieuHoaKhoiPhuc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucBaoCaoThongKeBaiDang.resx">
+      <DependentUpon>ucBaoCaoThongKeBaiDang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucBaoCaoThongKeHopDong.resx">
+      <DependentUpon>ucBaoCaoThongKeHopDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucChinhSuaBaiDang.resx">
+      <DependentUpon>ucChinhSuaBaiDang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucDanhSachBaiDang.resx">
+      <DependentUpon>ucDanhSachBaiDang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucDanhSachHopDong.resx">
+      <DependentUpon>ucDanhSachHopDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <Compile Include="UC\ucThongTinUuDai.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC\ucThongTinUuDai.Designer.cs">
+      <DependentUpon>ucThongTinUuDai.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="FormLogin.resx">
+      <DependentUpon>FormLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormLoginAuth.resx">
+      <DependentUpon>FormLoginAuth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="UC\ucDanhSachNhanVien.resx">
+      <DependentUpon>ucDanhSachNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucTaoHopDong.resx">
+      <DependentUpon>ucTaoHopDong.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucTaoBaiDang.resx">
+      <DependentUpon>ucTaoBaiDang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucThongTinCaNhan.resx">
+      <DependentUpon>ucThongTinCaNhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucThongTinNhanVien.resx">
+      <DependentUpon>ucThongTinNhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucThongTinUuDai.resx">
+      <DependentUpon>ucThongTinUuDai.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC\ucXemCongViec.resx">
+      <DependentUpon>ucXemCongViec.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\Project_DBManager.DAO.DataProvider.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fig_QL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fig_Leader.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fig_NV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fig_QL1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_hancity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_teamDB.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login_NV.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login_QL.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fig_Leader1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fig_QL2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\logo_teamDB1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\name with logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DataBase Manager.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\login_btn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back-to-home.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back-to-home1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\text_DBManager.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow_down.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Box_light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\downl button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>9</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Import_light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Img_box_light.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets" Condition="Exists('..\packages\Stub.System.Data.SQLite.Core.NetFramework.1.0.115.5\build\net46\Stub.System.Data.SQLite.Core.NetFramework.targets')" />
+</Project>
